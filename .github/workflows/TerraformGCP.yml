@@ -85,10 +85,13 @@ jobs:
         gcloud auth activate-service-account --key-file=credentials_file.json
         gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
-    - name: Install Auth Plugin for cluster
-      env:
-        SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
-      run: bash  $SCRIPT_DIR/gcloud-auth-plugin.sh
+    # - name: Install Auth Plugin for cluster
+    #   env:
+    #     SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
+    #   run: bash  $SCRIPT_DIR/gcloud-auth-plugin.sh
+
+    - name: Auth Plugin for cluster
+      uses: simenandre/setup-gke-gcloud-auth-plugin@v1
 
     - name: Get kubeconfig 
       run: gcloud container clusters get-credentials $CLUSTER_NAME --region=$REGION --project=${{ secrets.GCP_PROJECT_ID }}
