@@ -82,7 +82,7 @@ spec:
       labels:
         app: wordpress
     spec:
-      restartPolicy: OnFailure
+      # restartPolicy: OnFailure
       # initContainers:
       #   - name: init
       #     image: dmonakh/init_db_wp:v1
