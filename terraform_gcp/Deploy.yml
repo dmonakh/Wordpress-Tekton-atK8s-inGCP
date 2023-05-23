@@ -40,7 +40,8 @@ spec:
             claimName: mysql-pvc
       containers:
         - name: mysql
-          image: mysql:5.7
+          image: mysql
+          command: ['--default-authentication-plugin=mysql_native_password']
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "wordsec"
@@ -81,6 +82,7 @@ spec:
       labels:
         app: wordpress
     spec:
+      restartPolicy: OnFailure
       # initContainers:
       #   - name: init
       #     image: dmonakh/init_db_wp:v1
@@ -96,6 +98,24 @@ spec:
       #         mountPath: /var/www/html
       #       - name: mysql-persistent-storage
       #         mountPath: /var/lib/mysql
+      initContainers:
+        - name: init
+          image: wordpress:cli
+          env:
+            - name: SERVER_NAME
+              value: "mysql"
+            - name: USER_NAME
+              value: "root"
+            - name: PASSWORD
+              value: "wordsec"
+          volumeMounts:
+            - name: wordpress-persistent-storage
+              mountPath: /var/www/html
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+          command: ["/bin/sh", "-c"]
+          args:
+            - /scripts/init_cli.sh
       containers:
         - name: wordpress
           image: wordpress:latest
