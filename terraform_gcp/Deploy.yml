@@ -97,24 +97,24 @@ spec:
       #         mountPath: /var/www/html
       #       - name: mysql-persistent-storage
       #         mountPath: /var/lib/mysql
-      # initContainers:
-      #   - name: init
-      #     image: wordpress:cli
-      #     env:
-      #       - name: SERVER_NAME
-      #         value: "mysql"
-      #       - name: USER_NAME
-      #         value: "root"
-      #       - name: PASSWORD
-      #         value: "wordsec"
-      #     volumeMounts:
-      #       - name: wordpress-persistent-storage
-      #         mountPath: /var/www/html
-      #       - name: mysql-persistent-storage
-      #         mountPath: /var/lib/mysql
-      #     command: ["/bin/sh", "-c"]
-      #     args:
-      #       - /scripts/init_cli.sh
+      initContainers:
+        - name: init
+          image: wordpress:cli
+          env:
+            - name: SERVER_NAME
+              value: "mysql"
+            - name: USER_NAME
+              value: "root"
+            - name: PASSWORD
+              value: "wordsec"
+          volumeMounts:
+            - name: wordpress-persistent-storage
+              mountPath: /var/www/html
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+          command: ["/bin/sh", "-c"]
+          args:
+            - /scripts/init_cli.sh
       containers:
         - name: wordpress
           image: wordpress:latest
