@@ -88,7 +88,7 @@ spec:
             - name: SERVER_NAME
               value: "mysql"
             - name: USER_NAME
-              value: "MyWordPress"
+              value: "root"
             - name: PASSWORD
               value: "wordsec"
           volumeMounts:

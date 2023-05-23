@@ -17,56 +17,56 @@ env:
   REGION: us-central1
 
 jobs:
-  terraform-CI:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./terraform_gcp
+  # terraform-CI:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       shell: bash
+  #       working-directory: ./terraform_gcp
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: latest
-          terraform_wrapper: false
+  #     - name: Setup Terraform
+  #       uses: hashicorp/setup-terraform@v2
+  #       with:
+  #         terraform_version: latest
+  #         terraform_wrapper: false
 
-      - name: Decode credentials
-        run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials_file.json
+  #     - name: Decode credentials
+  #       run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials_file.json
 
-      - name: Authenticate with Google Cloud
-        run: |
-          gcloud config set account ${SA_NAME}
-          gcloud auth activate-service-account --key-file=credentials_file.json
-          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+  #     - name: Authenticate with Google Cloud
+  #       run: |
+  #         gcloud config set account ${SA_NAME}
+  #         gcloud auth activate-service-account --key-file=credentials_file.json
+  #         gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Create bucket if dosn't exists
-        env:
-          SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
-        run: bash  $SCRIPT_DIR/create-bucket.sh
+  #     - name: Create bucket if dosn't exists
+  #       env:
+  #         SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
+  #       run: bash  $SCRIPT_DIR/create-bucket.sh
           
-      - name: terraform init
-        run: terraform init
+  #     - name: terraform init
+  #       run: terraform init
 
-      - name: terraform plan
-        id: plan
-        run: terraform plan -lock=false -var="project_id=${{ secrets.GCP_PROJECT_ID }}" 
+  #     - name: terraform plan
+  #       id: plan
+  #       run: terraform plan -lock=false -var="project_id=${{ secrets.GCP_PROJECT_ID }}" 
       
-      - name: terraform apply 
-        if: "!contains(github.event.head_commit.message, 'destroy')"
-        run: terraform apply -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+  #     - name: terraform apply 
+  #       if: "!contains(github.event.head_commit.message, 'destroy')"
+  #       run: terraform apply -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
 
-      - name: Terraform Destroy
-        if: contains(github.event.head_commit.message, 'destroy')
-        run: terraform destroy -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+  #     - name: Terraform Destroy
+  #       if: contains(github.event.head_commit.message, 'destroy')
+  #       run: terraform destroy -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
 
   terraform-CD:
-    needs: 
-      - terraform-CI
-    if: "!contains(github.event.head_commit.message, 'destroy') "
+    # needs: 
+    #   - terraform-CI
+    # if: "!contains(github.event.head_commit.message, 'destroy') "
     runs-on: ubuntu-latest
     defaults:
       run:
