@@ -40,7 +40,7 @@ spec:
             claimName: mysql-pvc
       containers:
         - name: mysql
-          image: mysql
+          image: mysql:5.7
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "wordsec"
