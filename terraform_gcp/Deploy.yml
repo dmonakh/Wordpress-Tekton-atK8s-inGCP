@@ -108,6 +108,8 @@ spec:
             - name: PASSWORD
               value: "wordsec"
           volumeMounts:
+            - name: scripts
+              mountPath: /scripts
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
             - name: mysql-persistent-storage

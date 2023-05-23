@@ -1,10 +1,10 @@
 #! /usr/bin/env bash
 
-# Test we can access the db container allowing for start
-for i in {1..50}; do mysql -u root -p${MYSQL_ROOT_PASSWORD} -h db -e "show databases" && s=0 && break || s=$? && sleep 2; done
-if [ ! $s -eq 0 ]; then exit $s; fi
+# Install Core
+wp --allow-root core install --url=localhost --title="MyITSite" --admin_user=dmonakh --admin_password=monakh3108 --admin_email=den3108mon@gmail.com
 
-# Init some stuff in db before leaving the floor to the application
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -h db -e "create database wp_bd"
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -h db -e "create table wp_bd.table_wp (id int unsigned not null auto_increment primary key, myval varchar(255) not null)"
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -h db -e "insert into wp_bd.table_wp (myval) values ('it'), ('bd'), ('wp')"
+# Download and install Neve theme
+wp --allow-root theme install neve --activate
+
+# Download and install Contact Form 7 Plugin
+wp plugin install contact-form-7  --activate
