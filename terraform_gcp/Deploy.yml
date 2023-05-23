@@ -81,9 +81,26 @@ spec:
       labels:
         app: wordpress
     spec:
+      initContainers:
+        - name: init
+          image: dmonakh/init_db_wp:v1
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: "mysql"
+            - name: WORDPRESS_DB_NAME
+              value: "DataBaseMon"
+            - name: WORDPRESS_DB_USER
+              value: "MyWordPress"
+            - name: WORDPRESS_DB_PASSWORD
+              value: "wordsec"
+          volumeMounts:
+            - name: wordpress-persistent-storage
+              mountPath: /var/www/html
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
       # initContainers:
       #   - name: init
-      #     image: dmonakh/init_db_wp:v1
+      #     image: wordpress:cli
       #     env:
       #       - name: SERVER_NAME
       #         value: "mysql"
@@ -96,21 +113,6 @@ spec:
       #         mountPath: /var/www/html
       #       - name: mysql-persistent-storage
       #         mountPath: /var/lib/mysql
-      initContainers:
-        - name: init
-          image: wordpress:cli
-          env:
-            - name: SERVER_NAME
-              value: "mysql"
-            - name: USER_NAME
-              value: "root"
-            - name: PASSWORD
-              value: "wordsec"
-          volumeMounts:
-            - name: wordpress-persistent-storage
-              mountPath: /var/www/html
-            - name: mysql-persistent-storage
-              mountPath: /var/lib/mysql
       containers:
         - name: wordpress
           image: wordpress:latest
