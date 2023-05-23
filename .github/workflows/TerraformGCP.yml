@@ -57,11 +57,11 @@ jobs:
       
       - name: terraform apply 
         if: "!contains(github.event.head_commit.message, 'destroy')"
-        run: terraform apply -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+        run: terraform apply -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
 
       - name: Terraform Destroy
         if: contains(github.event.head_commit.message, 'destroy')
-        run: terraform destroy -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+        run: terraform destroy -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
 
   terraform-CD:
     needs: 
