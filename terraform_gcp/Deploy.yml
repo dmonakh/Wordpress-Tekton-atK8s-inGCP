@@ -70,14 +70,21 @@ spec:
       labels:
         app: wordpress
     spec:
-      # initContainers:
-      #   - name: init
-      #     image: dmonakh/init_db_wp:v1 
-      #     volumeMounts:
-      #       - name: wordpress-persistent-storage
-      #         mountPath: /var/www/html
-      #       - name: mysql-persistent-storage
-      #         mountPath: /var/lib/mysql
+      initContainers:
+        - name: init
+          image: dmonakh/init_db_wp:v1
+          env:
+            - name: SERVER_NAME
+              value: "mysql"
+            - name: USER_NAME
+              value: "MyWordPress"
+            - name: PASSWORD
+              value: "wordsec"
+          volumeMounts:
+            - name: wordpress-persistent-storage
+              mountPath: /var/www/html
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
       containers:
         - name: wordpress
           image: wordpress:latest
