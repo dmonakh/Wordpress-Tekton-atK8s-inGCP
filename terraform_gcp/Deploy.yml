@@ -81,7 +81,6 @@ spec:
       labels:
         app: wordpress
     spec:
-      # restartPolicy: OnFailure
       # initContainers:
       #   - name: init
       #     image: dmonakh/init_db_wp:v1
@@ -108,15 +107,10 @@ spec:
             - name: PASSWORD
               value: "wordsec"
           volumeMounts:
-            - name: scripts
-              mountPath: /scripts
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
-          command: ["/bin/sh", "-c"]
-          args:
-            - /scripts/init_cli.sh
       containers:
         - name: wordpress
           image: wordpress:latest
