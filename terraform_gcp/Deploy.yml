@@ -41,7 +41,7 @@ spec:
       containers:
         - name: mysql
           image: mysql
-          comand: '--default-authentication-plugin=mysql_native_password'
+          command: ["--default-authentication-plugin=mysql_native_password"]
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "wordsec"
