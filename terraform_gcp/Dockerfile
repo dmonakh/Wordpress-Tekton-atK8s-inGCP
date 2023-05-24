@@ -1,5 +1,5 @@
 FROM alpine:3.14
-# RUN apk add --no-cache mysql-client
+RUN apk add --no-cache mysql-client
 RUN mkdir -p /var/www/html/ && chmod 777 /var/www/html/
 # Установить зависимости для WP-CLI
 RUN apk add --no-cache \
