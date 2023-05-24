@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mysql -h mysql -u root -pwordsec -e "\
+mysql --default-authentication-plugin=mysql_native_password -h mysql -u root -pwordsec -e "\
    CREATE DATABASE IF NOT EXISTS WordPress; \
     USE WordPress; \
     CREATE TABLE IF NOT EXISTS TableforWP (id INT PRIMARY KEY, name VARCHAR(50)); \
