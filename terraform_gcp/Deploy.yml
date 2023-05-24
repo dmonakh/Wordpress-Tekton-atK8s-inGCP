@@ -40,7 +40,8 @@ spec:
             claimName: mysql-pvc
       containers:
         - name: mysql
-          image: mysql:5.7
+          image: mysql
+          comand: '--default-authentication-plugin=mysql_native_password'
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "wordsec"
@@ -90,7 +91,7 @@ spec:
             claimName: mysql-pvc
       initContainers:
         - name: init
-          image: dmonakh/init_db_wp:v3
+          image: dmonakh/init_db_wp:v1
           env:
             - name: WORDPRESS_DB_HOST
               value: "mysql"
