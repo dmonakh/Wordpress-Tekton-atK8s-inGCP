@@ -1,6 +1,6 @@
 FROM alpine:3.14
 # RUN apk add --no-cache mysql-client
-RUN mkdir -p /var/www/html/ && chmod 777 /var/www/html/
+# RUN mkdir -p /var/www/html/ && chmod 777 /var/www/html/
 # Установить зависимости для WP-CLI
 RUN apk add --no-cache \
         less \
@@ -41,7 +41,7 @@ else \
         --dbpass=wordsec \
         --allow-root && \
     wp --allow-root --path=/var/www/html core install \
-        --url=http://techspace.tech/ \
+        --url=localhost \
         --title=WPsite \
         --admin_user=dmonakh \
         --admin_password=monakh3108d \
