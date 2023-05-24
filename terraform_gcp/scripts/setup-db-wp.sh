@@ -14,12 +14,12 @@ else
     wp core download --path=/var/www/html --allow-root && \
     wp --allow-root --path=/var/www/html config create \
       --dbhost=mysql \
-      --dbname=WordPress \
+      --dbname=DataBaseMon \
       --dbuser=MyWordPress \
       --dbpass=wordsec \
       --allow-root && \
     wp --allow-root --path=/var/www/html core install \
-      --url=http://techspace.tech/  \
+      --url=localhost  \
       --title=WPsite \
       --admin_user=dmonakh \
       --admin_password=monakh3108d \
