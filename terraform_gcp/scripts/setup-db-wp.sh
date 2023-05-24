@@ -1,10 +1,10 @@
 #!/bin/sh
 
-mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
-   CREATE DATABASE IF NOT EXISTS WordPress; \
-    USE WordPress; \
-    CREATE TABLE IF NOT EXISTS TableforWP (id INT PRIMARY KEY, name VARCHAR(50)); \
-    INSERT IGNORE INTO TableforWP (id, name) VALUES (1, 'Den'), (2, 'Max'), (3, 'Len');" 
+# mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
+#    CREATE DATABASE IF NOT EXISTS WordPress; \
+#     USE WordPress; \
+#     CREATE TABLE IF NOT EXISTS TableforWP (id INT PRIMARY KEY, name VARCHAR(50)); \
+#     INSERT IGNORE INTO TableforWP (id, name) VALUES (1, 'Den'), (2, 'Max'), (3, 'Len');" 
 if [  -f /var/www/html/wp-config.php ]; then  
     wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
     wp --allow-root --path=/var/www/html theme install hestia    && \

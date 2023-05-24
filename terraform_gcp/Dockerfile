@@ -22,34 +22,34 @@ RUN wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh
 # ENV SERVER_NAME mysql
 # ENV USER_NAME root
 # ENV PASSWORD wordsec
-# # Вынесенные скрипты
-# COPY scripts/setup-db-wp.sh /usr/local/bin/setup-db-wp.sh
-# RUN chmod +x /usr/local/bin/setup-db-wp.sh /usr/local/bin/setup-db-wp.sh
-# # Установить entrypoint на setup-db-wp.sh
-# ENTRYPOINT ["/usr/local/bin/setup-db-wp.sh"]
+# Вынесенные скрипты
+COPY scripts/setup-db-wp.sh /usr/local/bin/setup-db-wp.sh
+RUN chmod +x /usr/local/bin/setup-db-wp.sh /usr/local/bin/setup-db-wp.sh
+# Установить entrypoint на setup-db-wp.sh
+ENTRYPOINT ["/usr/local/bin/setup-db-wp.sh"]
 
-CMD if [ -f /var/www/html/wp-config.php ]; then \
-    wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
-    wp --allow-root --path=/var/www/html theme install hestia && \
-    wp --allow-root --path=/var/www/html theme activate hestia; \
-else \
-    wp core download --path=/var/www/html --allow-root && \
-    wp --allow-root --path=/var/www/html config create \
-        --dbhost=mysql \
-        --dbname=WordPress \
-        --dbuser=MyWordPress \
-        --dbpass=wordsec \
-        --allow-root && \
-    wp --allow-root --path=/var/www/html core install \
-        --url=localhost \
-        --title=WPsite \
-        --admin_user=dmonakh \
-        --admin_password=monakh3108d \
-        --admin_email=den3108@mon.com && \
-    wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
-    wp --allow-root --path=/var/www/html theme install twentytwentytwo && \
-    wp --allow-root --path=/var/www/html theme activate twentytwentytwo; \
-fi
+# CMD if [ -f /var/www/html/wp-config.php ]; then \
+#     wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
+#     wp --allow-root --path=/var/www/html theme install hestia && \
+#     wp --allow-root --path=/var/www/html theme activate hestia; \
+# else \
+#     wp core download --path=/var/www/html --allow-root && \
+#     wp --allow-root --path=/var/www/html config create \
+#         --dbhost=mysql \
+#         --dbname=WordPress \
+#         --dbuser=MyWordPress \
+#         --dbpass=wordsec \
+#         --allow-root && \
+#     wp --allow-root --path=/var/www/html core install \
+#         --url=localhost \
+#         --title=WPsite \
+#         --admin_user=dmonakh \
+#         --admin_password=monakh3108d \
+#         --admin_email=den3108@mon.com && \
+#     wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
+#     wp --allow-root --path=/var/www/html theme install twentytwentytwo && \
+#     wp --allow-root --path=/var/www/html theme activate twentytwentytwo; \
+# fi
 
 
  
