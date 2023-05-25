@@ -1,10 +1,13 @@
 #!/bin/sh
 
-mysql -h mysql -u root -pwordsec -P 3306 -e "\
+sleep 30
+# Сreate a database
+mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
    CREATE DATABASE IF NOT EXISTS WordPress; \
     USE WordPress; \
     CREATE TABLE IF NOT EXISTS TableforWP (id INT PRIMARY KEY, name VARCHAR(50)); \
-    INSERT IGNORE INTO TableforWP (id, name) VALUES (1, 'Den'), (2, 'Max'), (3, 'Len');" 
+    INSERT IGNORE INTO TableforWP (id, name) VALUES (1, 'Den'), (2, 'Max'), (3, 'Len');"  
+sleep 30                
 if [  -f /var/www/html/wp-config.php ]; then  
     wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
     wp --allow-root --path=/var/www/html theme install hestia    && \
@@ -14,8 +17,8 @@ else
     wp core download --path=/var/www/html --allow-root && \
     wp --allow-root --path=/var/www/html config create \
       --dbhost=mysql \
-      --dbname=DataBaseMon \
-      --dbuser=MyWordPress \
+      --dbname=WordPress \
+      --dbuser=root \
       --dbpass=wordsec \
       --allow-root && \
     wp --allow-root --path=/var/www/html core install \

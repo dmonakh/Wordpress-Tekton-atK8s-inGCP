@@ -13,6 +13,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: wp-pv-claim
+  labels:
+    app: wordpress
 spec:
   accessModes:
     - ReadWriteOnce
@@ -92,16 +94,7 @@ spec:
             claimName: mysql-pvc
       initContainers:
         - name: init
-          image: dmonakh/init_db_wp:v2
-          env:
-            - name: WORDPRESS_DB_HOST
-              value: "mysql"
-            - name: WORDPRESS_DB_NAME
-              value: "DataBaseMon"
-            - name: WORDPRESS_DB_USER
-              value: "MyWordPress"
-            - name: WORDPRESS_DB_PASSWORD
-              value: "wordsec"
+          image: dmonakh/init_db_wp:v1
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
@@ -114,9 +107,9 @@ spec:
             - name: WORDPRESS_DB_HOST
               value: "mysql"
             - name: WORDPRESS_DB_NAME
-              value: "DataBaseMon"
+              value: "WordPress"
             - name: WORDPRESS_DB_USER
-              value: "MyWordPress"
+              value: "root"
             - name: WORDPRESS_DB_PASSWORD
               value: "wordsec"
           ports:
