@@ -13,3 +13,26 @@ tkn hub install task git-clone --version 0.6
 tkn hub install task buildah --version 0.3
 
 tkn hub install task kubernetes-actions --version 0.2
+
+# create your Docker registry secret
+cat > secret-sa.yml.yaml << EOM
+apiVersion: v1
+kind: Secret
+metadata:
+  name: docker-secret
+  annotations:
+    tekton.dev/docker-0: https://index.docker.io/
+type: kubernetes.io/basic-auth
+stringData:
+  username: dmonakh
+  password: 3!08mondy
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: docker-login
+secrets:
+  - name: docker-secret
+EOM
+
+kubectl apply -f secret-sa.yml  
