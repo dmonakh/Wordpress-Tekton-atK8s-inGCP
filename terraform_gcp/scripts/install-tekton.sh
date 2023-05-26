@@ -15,7 +15,7 @@ tkn hub install task buildah --version 0.3
 tkn hub install task kubernetes-actions --version 0.2
 
 # create your Docker registry secret
-cat > secret-sa.yml.yaml << EOM
+cat > secret-sa.yml << EOM
 apiVersion: v1
 kind: Secret
 metadata:
