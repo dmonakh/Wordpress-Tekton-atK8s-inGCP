@@ -94,7 +94,7 @@ jobs:
     - name: Apply Kubernetes manifest
       run: kubectl apply -f Deploy.yml
 
-    - name: Wait for 60 seconds()
+    - name: Wait for 120 seconds()
       run: sleep 120s
 
     - name: Check Service
