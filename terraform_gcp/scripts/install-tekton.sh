@@ -1,18 +1,23 @@
 #!/bin/bash
 
-kubectl apply --filename \
-https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+# Install Tekton CLI
+echo "Tekton CLI"
+curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tektoncd-cli-0.30.1_Linux-64bit.deb
+sudo dpkg -i ./tektoncd-cli-0.30.1_Linux-64bit.deb
 
-# Get the tar.xz
-curl -LO https://github.com/tektoncd/cli/releases/download/v0.31.0/tkn_0.31.0_Linux_x86_64.tar.gz
-# Extract tkn to your PATH (e.g. /usr/local/bin)
-sudo tar xvzf tkn_0.31.0_Linux_x86_64.tar.gz -C /usr/local/bin/ tkn
+# Install tasks from Tekton Hub
+echo "install"
+tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
 
-tkn hub install task git-clone --version 0.6
+echo "Install Tekton Pipelines"
+# Install Tekton Pipelines
+kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
 
-tkn hub install task buildah --version 0.3
+# Install Tekton Triggers
+kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers/latest/release.yaml
 
-tkn hub install task kubernetes-actions --version 0.2
+# Install Tekton Operators
+kubectl apply -f https://storage.googleapis.com/tekton-releases/operator/latest/release.yaml
 
 # create your Docker registry secret
 cat > secret-sa.yml << EOM
