@@ -6,7 +6,7 @@ spec:
   pipelineRef:
     name: pipeline
   workspaces:
-    - name: myworkspace
+    - name: workspace
       volumeClaimTemplate:
         spec:
           accessModes:

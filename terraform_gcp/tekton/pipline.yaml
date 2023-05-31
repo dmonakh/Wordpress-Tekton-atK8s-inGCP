@@ -4,22 +4,22 @@ metadata:
   name: pipeline
 spec:
   workspaces:
-    - name: myworkspace
+    - name: workspace
   tasks:
     - name: set-permissions
       taskRef:
         name: set-permissions
       workspaces:
         - name: output
-          workspace: myworkspace 
+          workspace: workspace
     - name: fetch-repository
       taskRef:
         name: git-clone
-      runAfter: 
+      runAfter:
         - set-permissions
       workspaces:
         - name: output
-          workspace: myworkspace
+          workspace: workspace
       params:
         - name: url
           value: "https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP"
@@ -37,4 +37,4 @@ spec:
           value: docker-secret
       workspaces:
         - name: source
-          workspace: myworkspace 
+          workspace: workspace

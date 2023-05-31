@@ -3,6 +3,8 @@ kind: Task
 metadata:
   name: set-permissions
 spec:
+  workspaces:
+    - name: output
   steps:
     - name: set-permissions
       image: alpine
