@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline
+spec:
+  workspaces:
+    - name: myworkspace
+  tasks:
+    - name: fetch-repository
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: myworkspace
+      params:
+        - name: url
+          value: "https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP"
+        - name: deleteExisting
+          value: "true"
+    - name: build
+      taskRef:
+        name: buildah
+      runAfter:
+        - fetch-repository
+      params:
+        - name: IMAGE
+          value: "docker.io/dmonakh/init_db_wp"
+        - name: IMAGE_PUSH_SECRET_NAME
+          value: docker-secret
+      workspaces:
+        - name: source
+          workspace: myworkspace

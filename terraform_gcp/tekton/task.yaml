@@ -1,0 +1,68 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: buildah
+spec:
+  params:
+    - name: IMAGE
+      description: Reference of the image buildah will produce.
+      default: dmonakh/init_db_wp:v1
+    - name: STORAGE_DRIVER
+      description: Set buildah storage driver
+      default: overlay
+    - name: DOCKERFILE
+      description: Path to the Dockerfile to build.
+      default: ./Dockerfile
+    - name: IMAGE_PUSH_SECRET_NAME
+      description: Kubernetes secrets contain image push username and password
+      default: docker-secret
+  workspaces:
+    - name: source
+  steps:
+    - name: build
+      image: quay.io/buildah/stable:v1.17.0
+      workingDir: $(workspaces.source.path)
+      script: |
+        buildah --storage-driver=$(params.STORAGE_DRIVER) bud \
+          --no-cache -f $(params.DOCKERFILE) -t $(params.IMAGE) .
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+      env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: $(params.IMAGE_PUSH_SECRET_NAME)
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: $(params.IMAGE_PUSH_SECRET_NAME)
+              key: password
+    - name: push
+      image: quay.io/buildah/stable:v1.17.0
+      workingDir: $(workspaces.source.path)
+      script: |
+        buildah --storage-driver=$(params.STORAGE_DRIVER) push \
+          --creds ${USERNAME}:${PASSWORD} $(params.IMAGE)
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+      env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: $(params.IMAGE_PUSH_SECRET_NAME)
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: $(params.IMAGE_PUSH_SECRET_NAME)
+              key: password
+  volumes:
+    - name: varlibcontainers
+      emptyDir: {}
