@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Install Tekton CLI
+# Install Tekton CLI
 echo "Tekton CLI"
 curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tektoncd-cli-0.30.1_Linux-64bit.deb
 sudo dpkg -i ./tektoncd-cli-0.30.1_Linux-64bit.de
@@ -16,7 +16,7 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers
 kubectl apply -f https://storage.googleapis.com/tekton-releases/operator/latest/release.yaml
 
 # Install tasks from Tekton Hub
-echo "install"
+echo "install Tasks form Hub"
 tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
 
 cat > secret-sa.yml << EOM
