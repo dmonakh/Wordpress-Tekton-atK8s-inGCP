@@ -3,6 +3,10 @@ kind: Pipeline
 metadata:
   name: pipeline
 spec:
+  params:
+    - name: DOCKERFILE
+      description: Path to the Dockerfile to build.
+      default: ./terraform_gcp/Dockerfile
   workspaces:
     - name: workspace
   tasks:
@@ -30,11 +34,25 @@ spec:
         name: buildah
       runAfter:
         - fetch-repository
-      params:
-        - name: IMAGE
-          value: "docker.io/dmonakh/init_db_wp"
-        - name: IMAGE_PUSH_SECRET_NAME
-          value: docker-secret
       workspaces:
         - name: source
-          workspace: workspace
+          workspace: workspace  
+      params:
+        - name: IMAGE
+          value: "docker.io/dmonakh/init_db_wp:v1"
+        - name: IMAGE_PUSH_SECRET_NAME
+          value: docker-secret
+        - name: FORMAT
+          value: "docker"
+        - name: CONTEXT
+          value: "$(workspaces.source.path)/terraform_gcp" 
+    - name: kubectl-run
+      taskRef:
+        name: kubernetes-actions
+      runAfter:
+        - build
+      params:
+        - name: action
+          value: apply
+        - name: manifest
+          value: "$(workspaces.source.path)/terraform_gcp/Deploy.yml" 
