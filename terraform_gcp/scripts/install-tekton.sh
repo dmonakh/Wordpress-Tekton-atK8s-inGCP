@@ -3,11 +3,8 @@
 Install Tekton CLI
 echo "Tekton CLI"
 curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tektoncd-cli-0.30.1_Linux-64bit.deb
-sudo dpkg -i ./tektoncd-cli-0.30.1_Linux-64bit.deb
+sudo dpkg -i ./tektoncd-cli-0.30.1_Linux-64bit.de
 
-# Install tasks from Tekton Hub
-echo "install"
-tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
 
 echo "Install Tekton Pipelines"
 # Install Tekton Pipelines
@@ -18,6 +15,10 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers
 
 # Install Tekton Operators
 kubectl apply -f https://storage.googleapis.com/tekton-releases/operator/latest/release.yaml
+
+# Install tasks from Tekton Hub
+echo "install"
+tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
 
 cat > secret-sa.yml << EOM
 apiVersion: v1

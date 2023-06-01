@@ -56,3 +56,9 @@ spec:
           value: apply
         - name: manifest
           value: "$(workspaces.source.path)/terraform_gcp/Deploy.yml" 
+        # - name: script
+        #   value: |
+        #     kubectl apply -f https://raw.githubusercontent.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/main/terraform_gcp/Deploy.yml
+
+
+
