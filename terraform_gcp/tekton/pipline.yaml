@@ -10,17 +10,17 @@ spec:
   workspaces:
     - name: workspace
   tasks:
-    # - name: set-permissions
-    #   taskRef:
-    #     name: set-permissions
-    #   workspaces:
-    #     - name: output
-    #       workspace: workspace
+    - name: set-permissions
+      taskRef:
+        name: set-permissions
+      workspaces:
+        - name: output
+          workspace: workspace
     - name: fetch-repository
       taskRef:
         name: git-clone
-      # runAfter:
-      #   - set-permissions
+      runAfter:
+        - set-permissions
       workspaces:
         - name: output
           workspace: workspace
