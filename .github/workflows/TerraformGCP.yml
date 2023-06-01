@@ -102,13 +102,13 @@ jobs:
     - name: Apply Tekton manifest
       env:
         TEKTON_DIR: ${{ github.workspace }}/terraform_gcp/tekton
-      run: kubectl apply -f $TEKTON_DIR/task.yaml && kubectl apply -f $TEKTON_DIR/pipline.yaml && kubectl apply -f $TEKTON_DIR/pipline-run.yaml
+      run: kubectl apply -f $TEKTON_DIR/role.yaml && kubectl apply -f $TEKTON_DIR/task.yaml && kubectl apply -f $TEKTON_DIR/pipline.yaml && kubectl apply -f $TEKTON_DIR/pipline-run.yaml
 
-    - name: Apply Kubernetes manifest
-      run: kubectl apply -f Deploy.yml
+    # - name: Apply Kubernetes manifest
+    #   run: kubectl apply -f Deploy.yml
 
-    - name: Wait for 120 seconds()
-      run: sleep 120s
+    - name: Wait for 180 seconds()
+      run: sleep 180s
 
     - name: Check Service
       run: kubectl get service 
