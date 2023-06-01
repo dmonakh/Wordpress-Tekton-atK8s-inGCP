@@ -102,7 +102,8 @@ jobs:
     - name: Apply Tekton manifest
       env:
         TEKTON_DIR: ${{ github.workspace }}/terraform_gcp/tekton
-      run: kubectl apply -f $TEKTON_DIR/role.yaml && kubectl apply -f $TEKTON_DIR/task.yaml && kubectl apply -f $TEKTON_DIR/pipline.yaml && kubectl apply -f $TEKTON_DIR/pipline-run.yaml
+      run: kubectl apply -f $TEKTON_DIR/role.yaml && kubectl apply -f $TEKTON_DIR/pipline.yaml && kubectl apply -f $TEKTON_DIR/pipline-run.yaml
+      # run: kubectl apply -f $TEKTON_DIR/role.yaml && kubectl apply -f $TEKTON_DIR/task.yaml && kubectl apply -f $TEKTON_DIR/pipline.yaml && kubectl apply -f $TEKTON_DIR/pipline-run.yaml
 
     # - name: Apply Kubernetes manifest
     #   run: kubectl apply -f Deploy.yml

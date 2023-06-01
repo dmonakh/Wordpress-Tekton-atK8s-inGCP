@@ -10,17 +10,17 @@ spec:
   workspaces:
     - name: workspace
   tasks:
-    - name: set-permissions
-      taskRef:
-        name: set-permissions
-      workspaces:
-        - name: output
-          workspace: workspace
+    # - name: set-permissions
+    #   taskRef:
+    #     name: set-permissions
+    #   workspaces:
+    #     - name: output
+    #       workspace: workspace
     - name: fetch-repository
       taskRef:
         name: git-clone
-      runAfter:
-        - set-permissions
+      # runAfter:
+      #   - set-permissions
       workspaces:
         - name: output
           workspace: workspace
@@ -52,13 +52,13 @@ spec:
       runAfter:
         - build
       params:
-        - name: action
-          value: apply
-        - name: manifest
-          value: "$(workspaces.source.path)/terraform_gcp/Deploy.yml" 
-        # - name: script
-        #   value: |
-        #     kubectl apply -f https://raw.githubusercontent.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/main/terraform_gcp/Deploy.yml
+        # - name: action
+        #   value: apply
+        # - name: manifest
+        #   value: "$(workspaces.source.path)/terraform_gcp/Deploy.yml" 
+        - name: script
+          value: |
+            kubectl apply -f https://raw.githubusercontent.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/main/terraform_gcp/Deploy.yml
 
 
 
