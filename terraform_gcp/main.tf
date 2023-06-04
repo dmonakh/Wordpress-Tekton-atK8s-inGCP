@@ -39,7 +39,7 @@ resource "google_container_cluster" "k8s_cluster" {
 
   cluster_autoscaling {
     auto_provisioning_defaults {
-      disk_size = 10
+      disk_size = 30
       disk_type = "pd-standard"
       oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform"
