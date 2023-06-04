@@ -28,7 +28,7 @@ resource "google_container_cluster" "k8s_cluster" {
       "https://www.googleapis.com/auth/cloud-platform"
     ]
     disk_type    = "pd-standard"
-    disk_size_gb = 10
+    disk_size_gb = 30
   }
 
   addons_config {
