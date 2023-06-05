@@ -11,6 +11,11 @@ on:
 
 env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  BUCKET_NAME: mondybucketgcp
+  SA_NAME: git-490@tidy-vent-384809.iam.gserviceaccount.com 
+  CLUSTER_NAME: mondyspout-clusterk8s
+  REGION: us-central1
 
 jobs: 
   Webhooks:
@@ -38,7 +43,7 @@ jobs:
     - name: Get kubeconfig 
       run: gcloud container clusters get-credentials $CLUSTER_NAME --region=$REGION --project=${{ secrets.GCP_PROJECT_ID }}
 
-    - name: Получение внешнего IP-адреса
+    - name: Get NGINX External IP
       id: get-external-ip
       run: |
         external_ip=$(kubectl get service -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
