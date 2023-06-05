@@ -101,9 +101,11 @@ jobs:
       run: bash  $SCRIPT_DIR/install-tekton.sh
 
     - name: Wait for 30 seconds()
+      if: contains(github.event.head_commit.message, 'init')
       run: sleep 30s
 
     - name: Create Webhook
+      if: contains(github.event.head_commit.message, 'init')
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
       run: |
