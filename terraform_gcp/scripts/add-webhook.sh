@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-external_ip=$1
+external_ip="$1"
 REPO="dmonakh/Wordpress-Tekton-atK8s-inGCP"
 WEBHOOK_URL="http://$external_ip/hooks"
 
