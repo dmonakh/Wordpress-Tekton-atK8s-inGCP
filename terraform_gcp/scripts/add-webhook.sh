@@ -1,20 +1,25 @@
-gh api repos/dmonakh/Wordpress-Tekton-atK8s-inGCP/hooks \
-   --input - <<< '{
-  "name": "web",
-  "active": true,
-  "events": [
-    "watch"
-  ],
-  "config": {
-    "url": "http://34.70.146.116/hooks",
-    "content_type": "json"
-  }
-}'
 
-# gh repo create-commit --allow-empty -m "Empty commit"
+#!/bin/bash
 
-# gh repo push
+REPO="dmonakh/Wordpress-Tekton-atK8s-inGCP"
+WEBHOOK_URL="http://34.70.146.116/hooks"
 
-# git commit --allow-empty -m "Empty-Commit"
+response=$(gh api repos/$REPO/hooks)
 
-# git push origin main
+if [ "$response" = "[]" ]; then
+  create_response=$(gh api repos/$REPO/hooks --input - <<< '{
+    "name": "web",
+    "active": true,
+    "events": [
+      "watch"
+    ],
+    "config": {
+      "url": "'$WEBHOOK_URL'",
+      "content_type": "json"
+    }
+  }')
+
+  echo "Webhook created: $create_response"
+else
+  echo "Webhook already exists"
+fi
