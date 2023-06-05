@@ -44,10 +44,12 @@ jobs:
       run: gcloud container clusters get-credentials $CLUSTER_NAME --region=$REGION --project=${{ secrets.GCP_PROJECT_ID }}
 
     - name: Get NGINX External IP
-      id: get-external-ip
+      env:
+        SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
       run: |
         external_ip=$(kubectl describe service -n ingress-nginx | grep "LoadBalancer Ingress:" | awk '{print $3}')
         echo "External IP: $external_ip"
+        bash $SCRIPT_DIR/add-webhook.sh $external_ip
 
     - name: Add webhook
       run: |
