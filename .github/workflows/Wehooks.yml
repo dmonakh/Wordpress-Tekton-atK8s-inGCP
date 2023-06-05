@@ -1,0 +1,32 @@
+name: Terraform deploy kubernetes cluster
+
+on:
+  push:
+    paths:
+      - 'terraform_gcp/**'
+      - '.github/workflows/TerraformGCP.yml'
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs: 
+  webbhooks:
+    needs: 
+      - terraform-CI
+    if: "!contains(github.event.head_commit.message, 'destroy') "
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform_gcp
+
+    steps:
+    - name: Clon Rep
+      uses: actions/checkout@v3  
+
+    - name: Add webhook
+      env:
+        SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
+      run: bash  $SCRIPT_DIR/add-webhook.sh
