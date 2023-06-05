@@ -14,9 +14,6 @@ env:
 
 jobs: 
   webbhooks:
-    needs: 
-      - terraform-CI
-    if: "!contains(github.event.head_commit.message, 'destroy') "
     runs-on: ubuntu-latest
     defaults:
       run:
