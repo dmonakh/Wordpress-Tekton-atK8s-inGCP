@@ -93,6 +93,7 @@ jobs:
       run: gcloud container clusters get-credentials $CLUSTER_NAME --region=$REGION --project=${{ secrets.GCP_PROJECT_ID }}
 
     - name: Install Tekton
+      if: contains(github.event.head_commit.message, 'init')
       env:
         DOCKER_USERNAME : ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
@@ -111,7 +112,7 @@ jobs:
         bash $SCRIPT_DIR/add-webhook.sh $external_ip
     
     - name: Create empty commit
-      if: "!contains(github.event.head_commit.message, 'init')"
+      if: contains(github.event.head_commit.message, 'init')
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
