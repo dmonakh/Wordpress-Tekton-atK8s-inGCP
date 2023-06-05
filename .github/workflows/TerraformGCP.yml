@@ -18,56 +18,56 @@ env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
-#   terraform-CI:
-#     runs-on: ubuntu-latest
-#     defaults:
-#       run:
-#         shell: bash
-#         working-directory: ./terraform_gcp
+  terraform-CI:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform_gcp
 
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-#       - name: Setup Terraform
-#         uses: hashicorp/setup-terraform@v2
-#         with:
-#           terraform_version: latest
-#           terraform_wrapper: false
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: latest
+          terraform_wrapper: false
 
-#       - name: Decode credentials
-#         run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials_file.json
+      - name: Decode credentials
+        run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials_file.json
 
-#       - name: Authenticate with Google Cloud
-#         run: |
-#           gcloud config set account ${SA_NAME}
-#           gcloud auth activate-service-account --key-file=credentials_file.json
-#           gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+      - name: Authenticate with Google Cloud
+        run: |
+          gcloud config set account ${SA_NAME}
+          gcloud auth activate-service-account --key-file=credentials_file.json
+          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
-#       - name: Create bucket if dosn't exists
-#         env:
-#           SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
-#         run: bash  $SCRIPT_DIR/create-bucket.sh
+      - name: Create bucket if dosn't exists
+        env:
+          SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
+        run: bash  $SCRIPT_DIR/create-bucket.sh
           
-#       - name: terraform init
-#         run: terraform init
+      - name: terraform init
+        run: terraform init
 
-#       - name: terraform plan
-#         id: plan
-#         run: terraform plan -lock=false -var="project_id=${{ secrets.GCP_PROJECT_ID }}" 
+      - name: terraform plan
+        id: plan
+        run: terraform plan -lock=false -var="project_id=${{ secrets.GCP_PROJECT_ID }}" 
       
-#       - name: terraform apply 
-#         if: "!contains(github.event.head_commit.message, 'destroy')"
-#         run: terraform apply -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+      - name: terraform apply 
+        if: "!contains(github.event.head_commit.message, 'destroy')"
+        run: terraform apply -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
 
-#       - name: Terraform Destroy
-#         if: contains(github.event.head_commit.message, 'destroy')
-#         run: terraform destroy -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+      - name: Terraform Destroy
+        if: contains(github.event.head_commit.message, 'destroy')
+        run: terraform destroy -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
 
   terraform-CD:
-    # needs: 
-    #   - terraform-CI
-    # if: "!contains(github.event.head_commit.message, 'destroy') "
+    needs: 
+      - terraform-CI
+    if: "!contains(github.event.head_commit.message, 'destroy') "
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -77,43 +77,39 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v3
 
-    # - name: Decode credentials
-    #   run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials_file.json
+    - name: Decode credentials
+      run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials_file.json
 
-    # - name: Authenticate with Google Cloud
-    #   run: |
-    #     gcloud config set account ${SA_NAME}
-    #     gcloud auth activate-service-account --key-file=credentials_file.json
-    #     gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+    - name: Authenticate with Google Cloud
+      run: |
+        gcloud config set account ${SA_NAME}
+        gcloud auth activate-service-account --key-file=credentials_file.json
+        gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
-    # - name: Auth Plugin for cluster
-    #   uses: simenandre/setup-gke-gcloud-auth-plugin@v1
+    - name: Auth Plugin for cluster
+      uses: simenandre/setup-gke-gcloud-auth-plugin@v1
 
-    # - name: Get kubeconfig 
-    #   run: gcloud container clusters get-credentials $CLUSTER_NAME --region=$REGION --project=${{ secrets.GCP_PROJECT_ID }}
+    - name: Get kubeconfig 
+      run: gcloud container clusters get-credentials $CLUSTER_NAME --region=$REGION --project=${{ secrets.GCP_PROJECT_ID }}
 
-    # - name: Install Tekton
-    #   env:
-    #     SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
-    #   run: bash  $SCRIPT_DIR/install-tekton.sh
+    - name: Install Tekton
+      env:
+        DOCKER_USERNAME : ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
+        SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
+      run: bash  $SCRIPT_DIR/install-tekton.sh
 
-    # - name: Wait for 30 seconds()
-    #   run: sleep 30s
+    - name: Wait for 30 seconds()
+      run: sleep 30s
 
-    # - name: Create Webhook
-    #   env:
-    #     SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
-    #   run: |
-    #     external_ip=$(kubectl describe service -n ingress-nginx | grep "LoadBalancer Ingress:" | awk '{print $3}')
-    #     echo "External IP: $external_ip"
-    #     bash $SCRIPT_DIR/add-webhook.sh $external_ip
-
-    # - name: Wait for 180 seconds()
-    #   run: sleep 180s
-
-    # - name: Check Service
-    #   run: kubectl get service 
-
+    - name: Create Webhook
+      env:
+        SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
+      run: |
+        external_ip=$(kubectl describe service -n ingress-nginx | grep "LoadBalancer Ingress:" | awk '{print $3}')
+        echo "External IP: $external_ip"
+        bash $SCRIPT_DIR/add-webhook.sh $external_ip
+    
     - name: Create empty commit
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -122,3 +118,9 @@ jobs:
         git config --global user.email "actions@github.com"
         git commit --allow-empty -m "Empty commit"
         git push
+
+    - name: Wait for 180 seconds()
+      run: sleep 180s
+
+    - name: Check Service
+      run: kubectl get service 

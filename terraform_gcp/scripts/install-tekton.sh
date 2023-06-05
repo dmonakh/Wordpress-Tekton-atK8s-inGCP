@@ -19,28 +19,6 @@ kubectl apply -f https://storage.googleapis.com/tekton-releases/operator/latest/
 echo "install Tasks form Hub"
 tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
 
-# cat > secret-sa.yml << EOM
-# apiVersion: v1
-# kind: Secret
-# metadata:
-#   name: docker-secret
-#   annotations:
-#     tekton.dev/docker-0: https://index.docker.io/
-# type: kubernetes.io/basic-auth
-# stringData:
-#   username: dmonakh
-#   password: Mondy3108Dude
-# ---
-# apiVersion: v1
-# kind: ServiceAccount
-# metadata:
-#   name: tekton-pipelines-controller
-# secrets:
-#   - name: docker-secret
-# EOM
-
-# kubectl apply -f secret-sa.yml  
-
 cat > regsecret.yaml << EOM
 kind: Secret
 apiVersion: v1
@@ -50,8 +28,8 @@ metadata:
     tekton.dev/docker-0: https://index.docker.io/
 type: kubernetes.io/basic-auth
 stringData:
-    username: dmonakh
-    password: Mondy3108Dude
+    username: $DOCKER_USERNAME
+    password: $DOCKER_PASSWORD
 EOM
 
 kubectl apply -f regsecret.yaml

@@ -50,5 +50,5 @@ spec:
       params:
         - name: script  
           value: |
-            kubectl apply -f https://raw.githubusercontent.com/blinovmaksym/Wordpress-Tekton-atK8s-inGCP/main/terraform_gcp/Deploy.yml
+            kubectl apply -f https://raw.githubusercontent.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/main/terraform_gcp/Deploy.yml
             
