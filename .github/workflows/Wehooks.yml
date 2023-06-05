@@ -52,7 +52,5 @@ jobs:
     - name: Add webhook
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
-        EXTERNAL_IP: ${{ steps.get-external-ip.outputs.external-ip }}
-      run: |
-        external_ip=EXTERNAL_IP
-        bash  $SCRIPT_DIR/add-webhook.sh
+        WEBHOOK_URL: ${{ steps.get-external-ip.outputs.external-ip }}
+      run: bash  $SCRIPT_DIR/add-webhook.sh
