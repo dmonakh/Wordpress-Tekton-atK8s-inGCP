@@ -2,7 +2,7 @@
 #!/bin/bash
 
 REPO="dmonakh/Wordpress-Tekton-atK8s-inGCP"
-WEBHOOK_URL="http://34.70.146.116/hooks"
+WEBHOOK_URL="http://35.223.180.134/hooks"
 
 response=$(gh api repos/$REPO/hooks)
 
