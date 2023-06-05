@@ -15,6 +15,6 @@ gh api repos/dmonakh/Wordpress-Tekton-atK8s-inGCP/hooks \
 
 # gh repo push
 
-git commit --allow-empty -m "Empty-Commit"
+# git commit --allow-empty -m "Empty-Commit"
 
-git push origin main
+# git push origin main
