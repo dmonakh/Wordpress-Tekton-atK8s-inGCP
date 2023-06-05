@@ -23,6 +23,21 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v3  
 
+    - name: Decode credentials
+      run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials_file.json
+
+    - name: Authenticate with Google Cloud
+      run: |
+        gcloud config set account ${SA_NAME}
+        gcloud auth activate-service-account --key-file=credentials_file.json
+        gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+
+    - name: Auth Plugin for cluster
+      uses: simenandre/setup-gke-gcloud-auth-plugin@v1
+
+    - name: Get kubeconfig 
+      run: gcloud container clusters get-credentials $CLUSTER_NAME --region=$REGION --project=${{ secrets.GCP_PROJECT_ID }}
+
     - name: Получение внешнего IP-адреса
       id: get-external-ip
       run: |
