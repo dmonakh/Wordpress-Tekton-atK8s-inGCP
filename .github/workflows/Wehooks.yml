@@ -46,7 +46,7 @@ jobs:
     - name: Get NGINX External IP
       id: get-external-ip
       run: |
-        external_ip=$(kubectl get service -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+        external_ip=$(kubectl describe service -n ingress-nginx | grep "LoadBalancer Ingress:" | awk '{print $3}')
         echo "External IP: $external_ip"
 
     - name: Add webhook
