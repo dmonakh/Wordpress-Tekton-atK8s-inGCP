@@ -2,7 +2,7 @@
 #!/bin/bash
 
 REPO="dmonakh/Wordpress-Tekton-atK8s-inGCP"
-WEBHOOK_URL="http://35.223.180.134/hooks"
+WEBHOOK_URL="http://$external_ip/hooks"
 
 response=$(gh api repos/$REPO/hooks)
 
@@ -11,7 +11,7 @@ if [ "$response" = "[]" ]; then
     "name": "web",
     "active": true,
     "events": [
-      "watch"
+      "push"
     ],
     "config": {
       "url": "'$WEBHOOK_URL'",
