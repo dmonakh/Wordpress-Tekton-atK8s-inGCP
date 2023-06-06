@@ -1,23 +1,28 @@
 #!/bin/bash
-
 # Install Tekton CLI
-echo "Tekton CLI"
+echo "1 ----- >Tekton CLI"
 curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tektoncd-cli-0.30.1_Linux-64bit.deb
 sudo dpkg -i ./tektoncd-cli-0.30.1_Linux-64bit.deb
 
-echo "Install Tekton Pipelines"
 # Install Tekton Pipelines
+echo "2 ----- >Install Tekton Pipelines"
 kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
 
+# Install Tekton Dashboard
+echo "3 ----- >Install Tekton Dashboard"
+kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboard/latest/release.yaml
+
+# Install tasks from Tekton Hub
+echo "4 ----- >Install tasks from Tekton Hub"
+tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
+
 # Install Tekton Triggers
+echo "5 ----- >Install Tekton Triggers"
 kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers/latest/release.yaml
 
 # Install Tekton Operators
+echo "6 ----- >Install Tekton Operators"
 kubectl apply -f https://storage.googleapis.com/tekton-releases/operator/latest/release.yaml
-
-# Install tasks from Tekton Hub
-echo "install Tasks form Hub"
-tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
 
 cat > regsecret.yaml << EOM
 kind: Secret
