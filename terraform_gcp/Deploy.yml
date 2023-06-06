@@ -102,7 +102,7 @@ spec:
               mountPath: /var/lib/mysql
       containers:
         - name: wordpress
-          image: wordpress:6.2.1
+          image: wordpress:latest
           env:
             - name: WORDPRESS_DB_HOST
               value: "mysql"
