@@ -1,23 +1,67 @@
-# WordPress with Tekton on GCP
+<h1 align="center">
+  <a href="https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP">
+    <img src="docs/images/logo.svg" alt="Logo" width="100" height="100">
+  </a>
+</h1>
 
-This repository contains configuration examples and templates for deploying WordPress on GCP using Tekton.
+<div align="center">
+  Wordpress-Tekton-atK8s-inGCP
+  <br />
+  <a href="#about"><strong>Explore the docs »</strong></a>
+  <br />
+  <br />
+  <a href="https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Bug</a>
+  ·
+  <a href="https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
+  ·
+  <a href="https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+">Ask a Question</a>
+</div>
 
-## Table of Contents
+<div align="center">
+<br />
 
-- [Description](#description)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Infrastructure Deployment](#infrastructure-deployment)
+[![Project license](https://img.shields.io/github/license/dmonakh/Wordpress-Tekton-atK8s-inGCP.svg?style=flat-square)](LICENSE)
+
+[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+[![code with love by dmonakh](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-dmonakh-ff1414.svg?style=flat-square)](https://github.com/dmonakh)
+
+</div>
+
+<details open="open">
+<summary>Table of Contents</summary>
+
+- [About](#about)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [Usage](#usage)
+- [Roadmap](#roadmap)
+- [Support](#support)
+- [Project Assistance](#project-assistance)
 - [Contributing](#contributing)
+- [Authors & Contributors](#authors--contributors)
+- [Security](#security)
 - [License](#license)
 
-## Description
+</details>
+
+---
+## About
 
 This project provides infrastructure files and templates for deploying WordPress on GCP using the Tekton tool. Tekton allows you to automate CI/CD processes and create a reliable and scalable pipeline for application development and delivery.
 
-## Requirements
+### Built With
+
+The project is built using the following technologies:
+
+- [Tekton](https://tekton.dev/) - A Kubernetes-native open-source framework for creating continuous integration and delivery (CI/CD) systems.
+- [Kubernetes](https://kubernetes.io/) - An open-source container orchestration platform for automating the deployment, scaling, and management of containerized applications.
+- [Google Cloud Platform (GCP)](https://cloud.google.com/) - A suite of cloud computing services provided by Google, including compute, storage, networking, and more.
+- [WordPress](https://wordpress.org/) - A popular open-source content management system (CMS) for creating websites and blogs.
+
+## Getting Started
+### Prequirements
 
 To implement this project, you will need the following components and accounts:
 
@@ -30,7 +74,7 @@ To implement this project, you will need the following components and accounts:
 
 Make sure you have all the required accounts and components for a successful project implementation.
 
-## Installation
+### Installation
 
 To deploy WordPress with Tekton, follow these steps:
 
@@ -49,7 +93,7 @@ git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
 
 5. Deploy the infrastructure in GCP using Terraform and GitHub Actions following the steps mentioned below.
 
-## Infrastructure Deployment
+### Infrastructure Deployment
 
 Before running the Tekton pipeline, you need to deploy the infrastructure in GCP using Terraform and GitHub Actions:
 
@@ -71,7 +115,7 @@ Before running the Tekton pipeline, you need to deploy the infrastructure in GCP
 
 8. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
 
-## Configuration
+### Configuration
 
 Before running the pipeline, you need to configure the following parameters:
 
