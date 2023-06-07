@@ -55,10 +55,14 @@ This project provides infrastructure files and templates for deploying WordPress
 
 The project is built using the following technologies:
 
-- [Tekton](https://tekton.dev/) - A Kubernetes-native open-source framework for creating continuous integration and delivery (CI/CD) systems.
-- [Kubernetes](https://kubernetes.io/) - An open-source container orchestration platform for automating the deployment, scaling, and management of containerized applications.
-- [Google Cloud Platform (GCP)](https://cloud.google.com/) - A suite of cloud computing services provided by Google, including compute, storage, networking, and more.
-- [WordPress](https://wordpress.org/) - A popular open-source content management system (CMS) for creating websites and blogs.
+- [Tekton](https://tekton.dev/): A Kubernetes-native open-source framework for creating continuous integration and delivery (CI/CD) systems.
+- [Kubernetes](https://kubernetes.io/): An open-source container orchestration platform for automating the deployment, scaling, and management of containerized applications.
+- [Google Cloud Platform (GCP)](https://cloud.google.com/): A suite of cloud computing services provided by Google, including compute, storage, networking, and more.
+- [WordPress](https://wordpress.org/): A popular open-source content management system (CMS) for creating websites and blogs.
+- [Terraform](https://www.terraform.io/): An open-source infrastructure as code software tool that enables you to define and provision infrastructure resources using declarative configuration files.
+- [Docker](https://www.docker.com/): An open-source platform that allows you to automate the deployment, scaling, and management of applications using containerization.
+
+These technologies work together to provide a robust and scalable solution for deploying and managing WordPress instances in the cloud. Tekton is used for creating CI/CD pipelines, Kubernetes handles the container orchestration, GCP provides the underlying cloud infrastructure, WordPress powers the content management, and Terraform and Docker are used for infrastructure provisioning and containerization, respectively.
 
 ## Getting Started
 ### Prequirements
@@ -74,6 +78,18 @@ To implement this project, you will need the following components and accounts:
 
 Make sure you have all the required accounts and components for a successful project implementation.
 
+
+### Configuration
+
+First, you need to configure the secret in repo:
+
+- `PROJECT_ID`: Your GCP project ID.
+- `GCP_CREDENTIALS` : you JSON key for authentication a coded with base64.
+- `CLUSTER_NAME`: The name of your Kubernetes cluster in GCP.
+- `GH_TOKEN`: Your token with permision on webhook or repo management. 
+- `DOCKER_USERNAME`: Your username in Docker Hub.
+- `DOCKER_PASSWORD`: Your password in Docker Hub.
+Make sure the specified parameters align with your environment and requirements.
 ### Installation
 
 To deploy WordPress with Tekton, follow these steps:
@@ -84,7 +100,7 @@ To deploy WordPress with Tekton, follow these steps:
 git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
 ```
 
-2. Install and configure the necessary components according to the Tekton documentation.
+2. 
 
 3. Modify the configuration settings in the `Deploy.yml` file according to your environment and requirements.
 
@@ -102,11 +118,10 @@ Before running the Tekton pipeline, you need to deploy the infrastructure in GCP
 
 3. Edit script `create-bucket.sh` and `beckend.tf` to store the Terraform state.
 
-4. In the GitHub repository that contains the infrastructure code, create a new secret named `GCP_SA_KEY` with the value of the GCP service account JSON key.
+4. ...
 
-5. Open the `.github/workflows/terraform.yaml` file and make the following changes:
-- Replace `GITHUB_REPOSITORY` with the URL of your Terraform state repository.
-- Replace `terraform-organization` with your Terraform Cloud organization (if applicable).
+5. Open the `.github/workflows/terraform.yml` file and make the following changes:
+...
 
 6. Commit and push all the changes to the repository.
 
@@ -114,27 +129,14 @@ Before running the Tekton pipeline, you need to deploy the infrastructure in GCP
 
 8. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
 
-### Configuration
-
-Before running the pipeline, you need to configure the following parameters:
-
-- `PROJECT_ID`: Your GCP project ID.
-- `CLUSTER_NAME`: The name of your Kubernetes cluster in GCP.
-- `DATABASE_HOST`: The WordPress database host.
-- `DATABASE_USERNAME`: The username for the database.
-- `DATABASE_PASSWORD`: The password for the database user.
-
-Make sure the specified parameters align with your environment and requirements.
-
 ## Usage
 
 After deploying the infrastructure using Terraform and GitHub Actions, you can run the Tekton pipeline to deploy WordPress by executing the following command:
+...
 
-```shell
-kubectl apply -f pipeline.yaml
-```
+The pipeline will automatically create and configure the necessary resources for deploying WordPress in your GCP project. You can track the progress of the pipeline execution through the Tekton dashboard or the command line.  
 
-The pipeline will automatically create and configure the necessary resources for deploying WordPress in your GCP project. You can track the progress of the pipeline execution through the Tekton dashboard or the command line.
+...
 
 ## Contributing
 
