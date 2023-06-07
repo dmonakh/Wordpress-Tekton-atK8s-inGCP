@@ -1,14 +1,14 @@
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: mysql-pvc
-# spec:
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 2Gi
-# ---     
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---     
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -20,7 +20,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 5Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,7 +39,7 @@ spec:
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
-            claimName: wp-pv-claim
+            claimName: mysql-pvc
       containers:
         - name: mysql
           image: mysql
@@ -91,10 +91,10 @@ spec:
             claimName: wp-pv-claim
         - name: mysql-persistent-storage
           persistentVolumeClaim:
-            claimName: wp-pv-claim
+            claimName: mysql-pvc
       initContainers:
         - name: init
-          image: dmonakh/init_db_wp:v1
+          image: dmonakh/init_db_wp:v2
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
