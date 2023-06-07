@@ -138,6 +138,32 @@ The pipeline will automatically create and configure the necessary resources for
 
 ...
 
+## Roadmap
+
+...
+
+## Support
+
+...
+
+## Project Assistance
+
+...
+
 ## Contributing
 
+...
 
+## Authors & Contributors
+
+...
+
+## Security
+
+...
+
+## License 
+
+This project is licensed under the **GNU General Public License v3**.
+
+See [LICENSE](LICENSE) for more information.
