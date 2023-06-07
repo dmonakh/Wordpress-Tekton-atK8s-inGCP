@@ -84,10 +84,9 @@ To deploy WordPress with Tekton, follow these steps:
 git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
 ```
 
-
 2. Install and configure the necessary components according to the Tekton documentation.
 
-3. Modify the configuration settings in the `config.yaml` file according to your environment and requirements.
+3. Modify the configuration settings in the `Deploy.yml` file according to your environment and requirements.
 
 4. Create and configure the secrets required for accessing the database and other resources.
 
@@ -97,11 +96,11 @@ git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
 
 Before running the Tekton pipeline, you need to deploy the infrastructure in GCP using Terraform and GitHub Actions:
 
-1. Navigate to the `terraform` directory.
+1. Navigate to the `terraform_gcp` directory.
 
-2. Edit the `terraform.tfvars` file and fill in the required variables for your environment.
+2. Edit the `variables.tf` file and fill in the required variables for your environment.
 
-3. Create a new repository in GitHub to store the Terraform state and copy its URL.
+3. Edit script `create-bucket.sh` and `beckend.tf` to store the Terraform state.
 
 4. In the GitHub repository that contains the infrastructure code, create a new secret named `GCP_SA_KEY` with the value of the GCP service account JSON key.
 
