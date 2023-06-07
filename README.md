@@ -136,8 +136,13 @@ After deploying the infrastructure using Terraform and GitHub Actions, you can r
 
 The pipeline will automatically create and configure the necessary resources for deploying WordPress in your GCP project. You can track the progress of the pipeline execution through the Tekton dashboard or the command line.  
 
-...
+Run: `kubectl --namespace tekton-pipelines port-forward svc/tekton-dashboard 9097:9097`
 
+Open: [Tekton Dashboard](http://127.0.0.1:9097/#/namespaces/default/pipelineruns) for reviewing the pipeline run.
+
+If step `Check Service` in GitHub Action shows an external IP for WordPress and the link works, well done!
+
+After that, you need to create an A record in your registered Domain and wait for 72 hours to check if the site works for your Domain. 
 ## Roadmap
 
 ...
