@@ -35,6 +35,7 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+  - [Configuration](#configuration)
 - [Usage](#usage)
 - [Roadmap](#roadmap)
 - [Support](#support)
@@ -78,7 +79,6 @@ To implement this project, you will need the following components and accounts:
 
 Make sure you have all the required accounts and components for a successful project implementation.
 
-
 ### Configuration
 
 First, you need to configure the secret in repo:
@@ -100,49 +100,46 @@ To deploy WordPress with Tekton, follow these steps:
 git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
 ```
 
-2. 
+2. "text"
 
 3. Modify the configuration settings in the `Deploy.yml` file according to your environment and requirements.
 
 4. Create and configure the secrets required for accessing the database and other resources.
 
-5. Deploy the infrastructure in GCP using Terraform and GitHub Actions following the steps mentioned below.
+5. text
 
-### Infrastructure Deployment
+6. Navigate to the `terraform_gcp` directory.
 
-Before running the Tekton pipeline, you need to deploy the infrastructure in GCP using Terraform and GitHub Actions:
+7. Edit the `variables.tf` file and fill in the required variables for your environment.
 
-1. Navigate to the `terraform_gcp` directory.
+8. Edit script `create-bucket.sh` and `beckend.tf` to store the Terraform state.
 
-2. Edit the `variables.tf` file and fill in the required variables for your environment.
+9. "text"
 
-3. Edit script `create-bucket.sh` and `beckend.tf` to store the Terraform state.
+10. Open the `.github/workflows/terraform.yml` file and make the following changes: "text"
 
-4. ...
+11. Commit and push all the changes to the repository.
 
-5. Open the `.github/workflows/terraform.yml` file and make the following changes:
-...
+12. GitHub Actions will automatically trigger the pipeline to deploy the infrastructure in GCP.
 
-6. Commit and push all the changes to the repository.
-
-7. GitHub Actions will automatically trigger the pipeline to deploy the infrastructure in GCP.
-
-8. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
+13. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
 
 ## Usage
 
-After deploying the infrastructure using Terraform and GitHub Actions, you can run the Tekton pipeline to deploy WordPress by executing the following command:
-...
+After deploying the infrastructure using Terraform and GitHub Actions, you wait and check GitHub Action.
 
-The pipeline will automatically create and configure the necessary resources for deploying WordPress in your GCP project. You can track the progress of the pipeline execution through the Tekton dashboard or the command line.  
+After step `Create empty commit` the tekton pipeline will automatically create and configure the necessary resources for deploying WordPress in your GCP project. 
+You can track the progress of the pipeline execution through the Tekton dashboard or the command line.  
 
 Run: `kubectl --namespace tekton-pipelines port-forward svc/tekton-dashboard 9097:9097`
 
 Open: [Tekton Dashboard](http://127.0.0.1:9097/#/namespaces/default/pipelineruns) for reviewing the pipeline run.
 
-If step `Check Service` in GitHub Action shows an external IP for WordPress and the link works, well done!
+If step `Check Service` in GitHub Action shows an external IP for WordPress and the link works, well done! 
+(Note: You can open this ip in your browser and get your site. But the display of the site will not be correct until you connect the domain)
 
-After that, you need to create an A record in your registered Domain and wait for 72 hours to check if the site works for your Domain. 
+After that, you need to create an A record in your registered Domain and wait about for 72 hours to check if the site works for your Domain.  
+(You can use [This Service](https://mxtoolbox.com/SuperTool.aspxto) track the update of your domain’s DNS records)
 ## Roadmap
 
 ...
