@@ -204,4 +204,3 @@ _For more information and to report security issues, please refer to our [securi
 This project is licensed under the **GNU General Public License v3**.
 
 See [LICENSE](LICENSE) for more information.
-
