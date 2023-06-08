@@ -83,7 +83,7 @@ Make sure you have all the required accounts and components for a successful pro
 
 First, you need to configure the secret in repo:
 
-- `PROJECT_ID`: Your GCP project ID.
+- `GCP_PROJECT_ID`: Your GCP project ID.
 - `GCP_CREDENTIALS` : you JSON key for authentication a coded with base64.
 - `CLUSTER_NAME`: The name of your Kubernetes cluster in GCP.
 - `GH_TOKEN`: Your token with permision on webhook or repo management. 
