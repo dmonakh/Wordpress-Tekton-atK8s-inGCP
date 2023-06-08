@@ -100,7 +100,7 @@ To deploy WordPress with Tekton, follow these steps:
 git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
 ```
 
-2. 2. Create a new repository on your GitHub account.
+2. Create a new repository on your GitHub account.
 
 3. Set up a remote repository for your local repository:
 
@@ -108,23 +108,28 @@ git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
     git remote set-url origin https://github.com/<your-username>/<your-repo-name>.git
     ```
 
-4. Modify the configuration settings in the `Deploy.yml` file according to your environment and requirements.
+4. Update the `terraform_gcp/variables.tf` with your desired configuration parameters, such as cluster name, region, zone, sa_name, sa_account and bucket for infrastructure.
 
 5. Create and configure the secrets required for accessing the database and other resources.
 
-6. text
+6. Update the `terraform_gcp/pipeline/triger.yaml` with your repo url and docker image for Tekton.
 
-7. Navigate to the `terraform_gcp` directory.
+7. To create a Wordpress initialization image:
 
-8. Edit the `variables.tf` file and fill in the required variables for your environment.
+  - Update the `terraform_gcp/scripts/setup-db-wp.sh` with your desired wordpress site data, in the url box, specify your domain, in the dbpass, specify root password and keep him. (If you need any necessary themes or     plugins, specify them in this script.)
+  - Update the `terraform_gcp/Dockerfile` in the ENV PASSWORD box, specify the root password you used on the last step. 
 
-9. Edit script `create-bucket.sh` and `beckend.tf` to store the Terraform state.
+8. Update the `terraform_gcp/Deploy.yml`, be sure to use a password like in last step, сhange the name for your image.
 
-10. "text"
+9. Enable GitHub Actions in your repository by creating a `.github/workflows` directory and copying the `TerraformGCP.yml` file from this repository:
 
-11. Open the `.github/workflows/terraform.yml` file and make the following changes: "text"
+    ```
+    mkdir -p .github/workflows
+    cp Wordpress-Tekton-atK8s-inGCP/.github/workflows/TerraformGCP.yml .github/workflows/TerraformGCP.yml
+    ```
+10. Update the `.github/workflows/TerraformGCP.yml` with your env.
 
-12. Commit and push all the changes to the repository.
+12. Commit `init` and push all the changes to the repository.
 
 13. GitHub Actions will automatically trigger the pipeline to deploy the infrastructure in GCP.
 
@@ -148,29 +153,50 @@ After that, you need to create an A record in your registered Domain and wait ab
 (You can use [This Service](https://mxtoolbox.com/SuperTool.aspxto) track the update of your domain’s DNS records)
 ## Roadmap
 
-...
+See the [open issues](https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues) for a list of proposed features (and known issues).
+
+- [Top Feature Requests](https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues?q=label%3Aenhancement+is%3Aopen+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
+- [Top Bugs](https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
+- [Newest Bugs](https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 ## Support
 
-...
+Reach out to the maintainer at one of the following places:
+
+- [GitHub issues](https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
+- Contact options listed on [this GitHub profile](https://github.com/dmonakh)
 
 ## Project Assistance
 
-...
+If you want to say **thank you** or/and support active development of WordPress Cloud at K8S:
+
+- Add a [GitHub Star](https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP) to the project.
+- Tweet about the WordPress Cloud at K8S.
+- Write interesting articles about the project on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or your personal blog.
+
+Together, we can make WordPress Cloud at K8S **better**!
 
 ## Contributing
 
-...
+First off, thanks for taking the time to contribute! Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are **greatly appreciated**.
 
-## Authors & Contributors
 
-...
+Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you for being involved!
+
+## Authors & contributors
+
+The original setup of this repository is by [Denys Moankh](https://github.com/dmonakh).
+
+For a full list of all authors and contributors, see [the contributors page](https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/contributors).
 
 ## Security
 
-...
+WordPress Cloud at K8S follows good practices of security, but 100% security cannot be assured.
+WordPress Cloud at K8S is provided **"as is"** without any **warranty**. Use at your own risk.
 
-## License 
+_For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._
+
+## License
 
 This project is licensed under the **GNU General Public License v3**.
 
