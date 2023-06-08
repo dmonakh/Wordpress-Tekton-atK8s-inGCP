@@ -85,7 +85,6 @@ First, you need to configure the secret in repo:
 
 - `GCP_PROJECT_ID`: Your GCP project ID.
 - `GCP_CREDENTIALS` : you JSON key for authentication a coded with base64.
-- `CLUSTER_NAME`: The name of your Kubernetes cluster in GCP.
 - `GH_TOKEN`: Your token with permision on webhook or repo management. 
 - `DOCKER_USERNAME`: Your username in Docker Hub.
 - `DOCKER_PASSWORD`: Your password in Docker Hub.
