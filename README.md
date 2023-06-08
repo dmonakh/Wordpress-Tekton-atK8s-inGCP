@@ -153,6 +153,7 @@ If step `Check Service` in GitHub Action shows an external IP for WordPress and 
 
 After that, you need to create an A record in your registered Domain and wait about for 72 hours to check if the site works for your Domain.  
 (You can use [This Service](https://mxtoolbox.com/SuperTool.aspxto) track the update of your domain’s DNS records)
+
 ## Roadmap
 
 See the [open issues](https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP/issues) for a list of proposed features (and known issues).
