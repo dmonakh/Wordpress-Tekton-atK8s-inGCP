@@ -27,3 +27,7 @@ variable "local_ip_range" {
 variable "gke_ip_range" {
   default = "10.200.0.0/19"
 }
+
+variable "bucket" {
+  default = "mondybucketgcp"
+}

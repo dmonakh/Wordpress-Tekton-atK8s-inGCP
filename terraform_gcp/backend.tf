@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "mondybucketgcp"
+    bucket = var.bucket
     prefix = "terraform/state"
     credentials = "credentials_file.json"
   }
