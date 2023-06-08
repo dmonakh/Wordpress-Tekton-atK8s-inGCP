@@ -100,29 +100,35 @@ To deploy WordPress with Tekton, follow these steps:
 git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
 ```
 
-2. "text"
+2. 2. Create a new repository on your GitHub account.
 
-3. Modify the configuration settings in the `Deploy.yml` file according to your environment and requirements.
+3. Set up a remote repository for your local repository:
 
-4. Create and configure the secrets required for accessing the database and other resources.
+    ```
+    git remote set-url origin https://github.com/<your-username>/<your-repo-name>.git
+    ```
 
-5. text
+4. Modify the configuration settings in the `Deploy.yml` file according to your environment and requirements.
 
-6. Navigate to the `terraform_gcp` directory.
+5. Create and configure the secrets required for accessing the database and other resources.
 
-7. Edit the `variables.tf` file and fill in the required variables for your environment.
+6. text
 
-8. Edit script `create-bucket.sh` and `beckend.tf` to store the Terraform state.
+7. Navigate to the `terraform_gcp` directory.
 
-9. "text"
+8. Edit the `variables.tf` file and fill in the required variables for your environment.
 
-10. Open the `.github/workflows/terraform.yml` file and make the following changes: "text"
+9. Edit script `create-bucket.sh` and `beckend.tf` to store the Terraform state.
 
-11. Commit and push all the changes to the repository.
+10. "text"
 
-12. GitHub Actions will automatically trigger the pipeline to deploy the infrastructure in GCP.
+11. Open the `.github/workflows/terraform.yml` file and make the following changes: "text"
 
-13. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
+12. Commit and push all the changes to the repository.
+
+13. GitHub Actions will automatically trigger the pipeline to deploy the infrastructure in GCP.
+
+14. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
 
 ## Usage
 
