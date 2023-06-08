@@ -112,7 +112,7 @@ To deploy WordPress with Tekton, follow these steps:
 
 5. Create and configure the secrets required for accessing the database and other resources.
 
-6. Update the `terraform_gcp/pipeline/triger.yaml` with your repo url and docker image for Tekton.
+6. Update the `terraform_gcp/pipeline/triger.yaml` with your repo url and docker image for Tekton, or `terraform_gcp/pipeline/clonebuildpush.yaml` with your repo raw.
 
 7. Update the `terraform_gcp/scripts/add-webhooks.sh` with your repo.
 
