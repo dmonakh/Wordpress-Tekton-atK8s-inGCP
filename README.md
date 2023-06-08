@@ -76,6 +76,7 @@ To implement this project, you will need the following components and accounts:
 - GitHub account for code storage and automation configuration.
 - GitHub token for accessing the repository and performing repository operations.
 - Domain registered with a domain registrar (e.g., Cloudflare) for DNS configuration.
+- Enable `Read and write permission` in General setting Action in Repo
 
 Make sure you have all the required accounts and components for a successful project implementation.
 
@@ -128,11 +129,13 @@ To deploy WordPress with Tekton, follow these steps:
     ```
 10. Update the `.github/workflows/TerraformGCP.yml` with your env.
 
-12. Commit `init` and push all the changes to the repository.
+12. Enable `Read and write permission` in General setting Action in Repo
 
-13. GitHub Actions will automatically trigger the pipeline to deploy the infrastructure in GCP.
+13. Commit `init` and push all the changes to the repository.
 
-14. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
+14. GitHub Actions will automatically trigger the pipeline to deploy the infrastructure in GCP.
+
+15. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
 
 ## Usage
 
