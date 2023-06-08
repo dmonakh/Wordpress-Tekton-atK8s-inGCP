@@ -1,4 +1,5 @@
 FROM alpine:3.14
+USER www-data
 # Install Mysql Client
 RUN apk add --no-cache mysql-client
 RUN mkdir -p /var/www/html/ && chmod 777 /var/www/html/
