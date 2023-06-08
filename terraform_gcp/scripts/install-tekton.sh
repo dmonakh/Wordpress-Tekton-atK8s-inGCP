@@ -15,7 +15,7 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboar
 # Install tasks from Tekton Hub
 echo "4 ----- >Install tasks from Tekton Hub"
 tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
-sleep 10
+sleep 20
 
 # Install Tekton Triggers
 echo "5 ----- >Install Tekton Triggers"

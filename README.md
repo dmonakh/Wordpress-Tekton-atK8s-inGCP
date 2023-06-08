@@ -74,9 +74,7 @@ To implement this project, you will need the following components and accounts:
 - GCP service account with IAM administrator privileges and a JSON key for authentication.
 - Docker Hub account (or another container registry) to store container images.
 - GitHub account for code storage and automation configuration.
-- GitHub token for accessing the repository and performing repository operations.
 - Domain registered with a domain registrar (e.g., Cloudflare) for DNS configuration.
-- Enable `Read and write permission` in General setting Action in Repo
 
 Make sure you have all the required accounts and components for a successful project implementation.
 
@@ -86,7 +84,7 @@ First, you need to configure the secret in repo:
 
 - `GCP_PROJECT_ID`: Your GCP project ID.
 - `GCP_CREDENTIALS` : you JSON key for authentication a coded with base64.
-- `GH_TOKEN`: Your token with permision on webhook or repo management. 
+- `GH_TOKEN`: Your token with permission on webhook or repo management. 
 - `DOCKER_USERNAME`: Your username in Docker Hub.
 - `DOCKER_PASSWORD`: Your password in Docker Hub.
 Make sure the specified parameters align with your environment and requirements.
@@ -100,7 +98,7 @@ To deploy WordPress with Tekton, follow these steps:
     git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
     ```
 
-2. Create a new repository on your GitHub account.
+2. Create a new repository on your GitHub account and enable `Read and write permission` in General setting Action in Repo
 
 3. Set up a remote repository for your local repository:
 
