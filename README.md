@@ -96,9 +96,9 @@ To deploy WordPress with Tekton, follow these steps:
 
 1. Clone this repository to your local machine:
 
-```shell
-git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
-```
+    ```
+    git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
+    ```
 
 2. Create a new repository on your GitHub account.
 
