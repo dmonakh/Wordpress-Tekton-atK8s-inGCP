@@ -110,22 +110,24 @@ To deploy WordPress with Tekton, follow these steps:
 
 5. Create and configure the secrets required for accessing the database and other resources.
 
-6. Update the `terraform_gcp/pipeline/triger.yaml` with your repo url and docker image for Tekton.
+6. Update the `terraform_gcp/pipeline/triger.yaml` with your repo url and docker image for Tekton, or `terraform_gcp/pipeline/clonebuildpush.yaml` with your repo raw.
 
-7. To create a Wordpress initialization image:
+7. Update the `terraform_gcp/scripts/add-webhooks.sh` with your repo.
+
+8. To create a Wordpress initialization image:
 
   - Update the `terraform_gcp/scripts/setup-db-wp.sh` with your desired wordpress site data, in the url box, specify your domain, in the dbpass, specify root password and keep him. (If you need any necessary themes or     plugins, specify them in this script.)
   - Update the `terraform_gcp/Dockerfile` in the ENV PASSWORD box, specify the root password you used on the last step. 
 
-8. Update the `terraform_gcp/Deploy.yml`, be sure to use a password like in last step, сhange the name for your image.
+9. Update the `terraform_gcp/Deploy.yml`, be sure to use a password like in last step, сhange the name for your image.
 
-9. Enable GitHub Actions in your repository by creating a `.github/workflows` directory and copying the `TerraformGCP.yml` file from this repository:
+10. Enable GitHub Actions in your repository by creating a `.github/workflows` directory and copying the `TerraformGCP.yml` file from this repository:
 
     ```
     mkdir -p .github/workflows
     cp Wordpress-Tekton-atK8s-inGCP/.github/workflows/TerraformGCP.yml .github/workflows/TerraformGCP.yml
     ```
-10. Update the `.github/workflows/TerraformGCP.yml` with your env.
+11. Update the `.github/workflows/TerraformGCP.yml` with your env.
 
 12. Enable `Read and write permission` in General setting Action in Repo
 
