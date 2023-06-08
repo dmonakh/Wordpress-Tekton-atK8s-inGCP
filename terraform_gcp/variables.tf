@@ -29,5 +29,6 @@ variable "gke_ip_range" {
 }
 
 variable "bucket" {
-  default = "mondybucketgcp"
+  type        = string
+  default     = "mondybucketgcp"
 }
