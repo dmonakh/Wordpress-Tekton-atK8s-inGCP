@@ -16,6 +16,7 @@ env:
   CLUSTER_NAME: mondyspout-clusterk8s
   REGION: us-central1
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  REPO: dmonakh/Wordpress-Tekton-atK8s-inGCP
 
 jobs:
   terraform-CI:
