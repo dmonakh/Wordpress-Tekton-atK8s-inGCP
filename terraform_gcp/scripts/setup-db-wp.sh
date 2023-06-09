@@ -9,6 +9,7 @@ mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
     INSERT IGNORE INTO TableforWP (id, name) VALUES (1, 'Den'), (2, 'Max'), (3, 'Len');"     
 sleep 10                
 if [  -f /var/www/html/wp-config.php ]; then  
+    sudo chmod g+r wp-config.php \
     wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
     wp --allow-root --path=/var/www/html theme install hestia    && \
     wp --allow-root --path=/var/www/html theme activate hestia     
@@ -21,6 +22,7 @@ else
       --dbuser=root \
       --dbpass=wordsec \
       --allow-root && \
+    sudo chmod g+r wp-config.php \
     wp --allow-root --path=/var/www/html core install \
       --url=localhost  \
       --title=WPsite \
