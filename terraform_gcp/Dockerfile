@@ -1,7 +1,7 @@
 FROM alpine:3.14
 # Install Mysql Client
 RUN apk add --no-cache mysql-client
-RUN mkdir -p /var/www/html/ && chmod 777 /var/www/html/
+RUN mkdir -p /var/www/html/ && chmod 755 /var/www/html/
 # Install dependencies for WP-CLI
 RUN apk add --no-cache \
         less \
