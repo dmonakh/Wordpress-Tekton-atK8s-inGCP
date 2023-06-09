@@ -1,7 +1,7 @@
 FROM alpine:3.14
+RUN mkdir -p /var/www/html/ && chmod 755 /var/www/html/
 # Install Mysql Client
 RUN apk add --no-cache mysql-client
-RUN mkdir -p /var/www/html/ && chmod 755 /var/www/html/
 # Install dependencies for WP-CLI
 RUN apk add --no-cache \
         less \
@@ -26,8 +26,5 @@ ENV PASSWORD wordsec
 # Implemented scripts
 COPY scripts/setup-db-wp.sh /usr/local/bin/setup-db-wp.sh
 RUN chmod +x /usr/local/bin/setup-db-wp.sh /usr/local/bin/setup-db-wp.sh
-RUN adduser -u 82 -D -G root www-data
-RUN mkdir -p /var/www/html/ && chown -R www-data:www-data /var/www/html/
-USER www-data
 # Install entrypoint for setup-db-wp.sh
 ENTRYPOINT ["/usr/local/bin/setup-db-wp.sh"]

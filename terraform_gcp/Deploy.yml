@@ -94,7 +94,7 @@ spec:
             claimName: mysql-pvc
       initContainers:
         - name: init
-          image: dmonakh/init_db_wp:v4
+          image: dmonakh/init_db_wp:v10
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html

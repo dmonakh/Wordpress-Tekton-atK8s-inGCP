@@ -33,7 +33,7 @@
 - [About](#about)
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
+  - [Prequirements](#prequirements)
   - [Configuration](#configuration)
   - [Installation](#installation)
 - [Usage](#usage)
