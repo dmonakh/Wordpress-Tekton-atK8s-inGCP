@@ -26,5 +26,8 @@ ENV PASSWORD wordsec
 # Implemented scripts
 COPY scripts/setup-db-wp.sh /usr/local/bin/setup-db-wp.sh
 RUN chmod +x /usr/local/bin/setup-db-wp.sh /usr/local/bin/setup-db-wp.sh
+RUN adduser -u 82 -D -G root www-data
+RUN mkdir -p /var/www/html/ && chown -R www-data:www-data /var/www/html/
+USER www-data
 # Install entrypoint for setup-db-wp.sh
 ENTRYPOINT ["/usr/local/bin/setup-db-wp.sh"]
