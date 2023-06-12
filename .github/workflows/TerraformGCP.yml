@@ -101,32 +101,32 @@ jobs:
         SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
       run: bash  $SCRIPT_DIR/install-tekton.sh
 
-    # - name: Wait for 60 seconds
-    #   if: contains(github.event.head_commit.message, 'init')
-    #   run: sleep 60s
+    - name: Wait for 60 seconds
+      if: contains(github.event.head_commit.message, 'init')
+      run: sleep 60s
 
-    # - name: Create Webhook
-    #   if: contains(github.event.head_commit.message, 'init')
-    #   env:
-    #     SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
-    #   run: |
-    #     external_ip=$(kubectl get svc ingress-nginx-controller -n ingress-nginx  -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-    #     echo "External IP: $external_ip"
-    #     bash $SCRIPT_DIR/add-webhook.sh $external_ip
+    - name: Create Webhook
+      if: contains(github.event.head_commit.message, 'init')
+      env:
+        SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
+      run: |
+        external_ip=$(kubectl get svc ingress-nginx-controller -n ingress-nginx  -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+        echo "External IP: $external_ip"
+        bash $SCRIPT_DIR/add-webhook.sh $external_ip
     
-    # - name: Create empty commit
-    #   if: contains(github.event.head_commit.message, 'init')
-    #   env:
-    #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
-    #   run: |
-    #     git config --global user.name "GitHub Actions"
-    #     git config --global user.email "actions@github.com"
-    #     git pull
-    #     git commit --allow-empty -m "Empty commit"
-    #     git push
+    - name: Create empty commit
+      if: contains(github.event.head_commit.message, 'init')
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git pull
+        git commit --allow-empty -m "Empty commit"
+        git push
 
-    # - name: Wait for 5 minutes
-    #   run: sleep 300s
+    - name: Wait for 5 minutes
+      run: sleep 300s
 
-    # - name: Check Service
-    #   run: kubectl get service 
+    - name: Check Service
+      run: kubectl get service 
