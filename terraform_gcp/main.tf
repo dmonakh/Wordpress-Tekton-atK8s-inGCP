@@ -55,6 +55,6 @@ resource "google_container_cluster" "k8s_cluster" {
 }
 provider "dns" {
   update {
-    key_name = "it-sproutdevteam.fun"
+    key_name = var.domain
   }
 }
