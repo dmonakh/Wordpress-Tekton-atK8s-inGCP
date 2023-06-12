@@ -72,6 +72,7 @@ To implement this project, you will need the following components and accounts:
 
 - GCP account with a configured project and access to the necessary resources.
 - GCP service account with IAM administrator privileges and a JSON key for authentication.
+- Enable [Kubernetes Engine API](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiJrP-jub7_AhUrlIsKHSntAOgQFnoECAcQAQ&url=https%3A%2F%2Fconsole.cloud.google.com%2Fapis%2Flibrary%2Fcontainer.googleapis.com&usg=AOvVaw2_PswnAyHk8xciaOOUM15Q)
 - Docker Hub account (or another container registry) to store container images.
 - GitHub account for code storage and automation configuration.
 - Domain registered with a domain registrar (e.g., Cloudflare) for DNS configuration.
@@ -87,6 +88,7 @@ First, you need to configure the secret in repo:
 - `GH_TOKEN`: Your token with permission on webhook or repo management. 
 - `DOCKER_USERNAME`: Your username in Docker Hub.
 - `DOCKER_PASSWORD`: Your password in Docker Hub.
+
 Make sure the specified parameters align with your environment and requirements.
 ### Installation
 
