@@ -101,7 +101,7 @@ jobs:
         SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
       run: bash  $SCRIPT_DIR/install-tekton.sh
 
-    - name: Wait for 60 seconds()
+    - name: Wait for 60 seconds
       if: contains(github.event.head_commit.message, 'init')
       run: sleep 60s
 
