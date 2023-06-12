@@ -125,8 +125,8 @@ jobs:
         git commit --allow-empty -m "Empty commit"
         git push
 
-    - name: Wait for 4 minutes
-      run: sleep 240s
+    - name: Wait for 5 minutes
+      run: sleep 300s
 
     - name: Check Service
       run: kubectl get service 

@@ -34,7 +34,7 @@ spec:
           - name: IMAGE
             value: "docker.io/dmonakh/init_db_wp"
           - name: TAG
-            value: v2
+            value: v1
         workspaces:
           - name: workspace
             volumeClaimTemplate:
