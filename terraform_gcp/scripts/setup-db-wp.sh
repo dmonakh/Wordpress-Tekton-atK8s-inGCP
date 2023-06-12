@@ -24,7 +24,7 @@ else
       --dbpass=wordsec \
       --allow-root && \
     wp --allow-root --path=/var/www/html core install \
-      --url=localhost  \
+      --url=it-sproutdevteam.fun  \
       --title=WPsite \
       --admin_user=dmonakh \
       --admin_password=monakh3108d \
@@ -33,4 +33,3 @@ else
     wp --allow-root --path=/var/www/html theme install twentytwentytwo  && \
     wp --allow-root --path=/var/www/html theme activate twentytwentytwo     
 fi
-
