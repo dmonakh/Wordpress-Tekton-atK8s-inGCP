@@ -85,7 +85,7 @@ First, you need to configure the secret in repo:
 
 - `GCP_PROJECT_ID`: Your GCP project ID.
 - `GCP_CREDENTIALS` : you JSON key for authentication a coded with base64.
-- `GH_TOKEN`: Your token with permission on webhook or repo management. 
+- `GH_TOKEN`: Your token with permission on webhook or repo management. ([To create a token, use](https://github.com/settings/tokens))
 - `DOCKER_USERNAME`: Your username in Docker Hub.
 - `DOCKER_PASSWORD`: Your password in Docker Hub.
 
@@ -129,7 +129,7 @@ To deploy WordPress with Tekton, follow these steps:
     ```
 10. Update the `.github/workflows/TerraformGCP.yml` with your env.
 
-11. Enable `Read and write permission` in General setting Action in Repo
+11. Enable `Read and write permission` in General setting Action in Repo. Check that there is no webhook in the repo, if there is remove.
 
 12. Commit `init` and push all the changes to the repository.
 
