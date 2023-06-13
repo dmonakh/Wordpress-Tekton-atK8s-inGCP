@@ -100,7 +100,7 @@ To deploy WordPress with Tekton, follow these steps:
     git clone https://github.com/dmonakh/Wordpress-Tekton-atK8s-inGCP.git
     ```
 
-2. Create a new repository on your GitHub account and enable `Read and write permission` in General setting Action in Repo
+2. Create a new repository on your GitHub account and enable `Read and write permission` in General setting Action in Repo. Check that there is no webhook in the repo, if there is remove.
 
 3. Set up a remote repository for your local repository:
 
@@ -129,13 +129,11 @@ To deploy WordPress with Tekton, follow these steps:
     ```
 10. Update the `.github/workflows/TerraformGCP.yml` with your env.
 
-11. Enable `Read and write permission` in General setting Action in Repo. Check that there is no webhook in the repo, if there is remove.
+11. Commit `init` and push all the changes to the repository.
 
-12. Commit `init` and push all the changes to the repository.
+12. GitHub Actions will automatically trigger the pipeline to deploy the infrastructure in GCP.
 
-13. GitHub Actions will automatically trigger the pipeline to deploy the infrastructure in GCP.
-
-14. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
+13. Wait for the pipeline to complete successfully to ensure the infrastructure is created successfully.
 
 ## Usage
 
