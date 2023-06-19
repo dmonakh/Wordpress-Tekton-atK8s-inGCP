@@ -14,4 +14,3 @@ if [ "$response" != "[]" ]; then
 else
   echo "Webhook doesn't exist"
 fi
-
