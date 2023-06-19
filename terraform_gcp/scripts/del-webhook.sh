@@ -9,7 +9,7 @@ if [ "$response" != "[]" ]; then
     hook_name=$(echo "$hook_response" | jq -r '.name')
     hook_url=$(echo "$hook_response" | jq -r '.config.url')
     delete_response=$(gh api repos/$REPO/hooks/$hook_id -X DELETE)
-    echo "Webhook deleted: $delete_response"
+    echo "Webhook deleted $delete_response"
   done
 else
   echo "Webhook doesn't exist"
