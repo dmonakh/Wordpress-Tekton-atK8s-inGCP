@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Получение списка вебхуков
 response=$(gh api repos/$REPO/hooks)
 
 if [ "$response" != "[]" ]; then
