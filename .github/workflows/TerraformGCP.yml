@@ -139,4 +139,6 @@ jobs:
       run: kubectl get service 
 
     - name: Get IP address
-      run: nslookup $(kubectl get svc wordpress -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+      run: |
+          external_ip_wp=$(kubectl get svc wordpress -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          echo "External IP WordPress: $external_ip_wp"
