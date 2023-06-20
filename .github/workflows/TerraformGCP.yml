@@ -139,4 +139,4 @@ jobs:
       run: kubectl get service 
 
     - name: Get IP address
-      run: nslookup $(kubectl get svc wordpress -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+      run: nslookup $(kubectl get svc wordpress -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
