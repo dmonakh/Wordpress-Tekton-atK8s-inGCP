@@ -150,7 +150,7 @@ Open: [Tekton Dashboard](http://127.0.0.1:9097/#/namespaces/default/pipelineruns
 
 Сonclusion: 
 
-If step `Check Service` in GitHub Action shows an external IP for WordPress and the link works, well done! 
+If step `Get IP address` in GitHub Action shows an external IP for WordPress and the link works, well done! 
 (Note: You can open this ip in your browser and get your site. But the display of the site will not be correct until you connect the domain)
 
 After that, you need to create an A record in your registered Domain and wait about for 72 hours to check if the site works for your Domain.  
