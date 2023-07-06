@@ -58,3 +58,4 @@ provider "dns" {
     key_name = var.domain
   }
 }
+
