@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export GPASS=$(kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo )
+
 export PROM_IP=$(kubectl get svc -n prometheus -o jsonpath='{.items[?(@.metadata.name=="prometheus-server")].spec.clusterIP}')
 
 cat > datasource.json << EOM
@@ -13,4 +15,4 @@ cat > datasource.json << EOM
   }
 EOM
 
-curl -X POST -H "Content-Type: application/json" -d @datasource.json -u admin:grafana1234 http://127.0.0.1:3000/api/datasources
+curl -X POST -H "Content-Type: application/json" -d @datasource.json -u admin:$GPASS http://127.0.0.1:3000/api/datasources
