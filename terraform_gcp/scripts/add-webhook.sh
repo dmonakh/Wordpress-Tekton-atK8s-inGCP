@@ -23,4 +23,3 @@ if [ "$response" = "[]" ]; then
 else
   echo "Webhook already exists"
 fi
-
