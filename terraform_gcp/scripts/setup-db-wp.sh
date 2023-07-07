@@ -33,4 +33,3 @@ else
     wp --allow-root --path=/var/www/html theme install twentytwentytwo  && \
     wp --allow-root --path=/var/www/html theme activate twentytwentytwo     
 fi
-
