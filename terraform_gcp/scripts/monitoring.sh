@@ -16,4 +16,3 @@ helm install prometheus prometheus-community/prometheus --namespace prometheus
 helm repo add grafana https://grafana.github.io/helm-charts
 kubectl create namespace grafana
 helm install grafana grafana/grafana --namespace grafana
-
