@@ -109,13 +109,13 @@ jobs:
       run: bash  $SCRIPT_DIR/install-tekton.sh
 
     - name: Install Monitoring
-      if: contains(github.event.head_commit.message, 'init')
+      if: contains(github.event.head_commit.message, 'Grafana')
       env: 
         SCRIPT_DIR: ${{ github.workspace }}/terraform_gcp/scripts
       run: bash  $SCRIPT_DIR/monitoring.sh || true
 
     - name: Get Grafana admin password 
-      if: contains(github.event.head_commit.message, 'init')
+      if: contains(github.event.head_commit.message, 'Grafana')
       run: kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo 
 
     - name: Wait for 2 minutes
