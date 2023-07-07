@@ -153,4 +153,3 @@ jobs:
       run: |
           external_ip_wp=$(kubectl get svc wordpress -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
           echo "External IP WordPress: $external_ip_wp"
-
